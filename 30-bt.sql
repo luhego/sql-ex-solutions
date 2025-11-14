@@ -2,12 +2,12 @@
 
 SELECT point, date, SUM(out), SUM(inc)
 FROM (
-    SELECT point, date, null, inc
+    SELECT point, date, null AS out, inc
     FROM income
-    UNION
-    SELECT point, date, out, null
+    UNION ALL
+    SELECT point, date, out, null AS inc
     FROM outcome
-)
+) AS temp
 GROUP BY point, date
 
 -- Another Solution
